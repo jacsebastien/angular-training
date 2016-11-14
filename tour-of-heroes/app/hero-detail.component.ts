@@ -15,7 +15,7 @@ import { Hero } from './hero';
         <label>name: </label>
         <!-- Use ngModel for 2 way data binding -->
         <input [(ngModel)]="hero.name" placeholder="name">
-      </div>
+      </div> 
     </div>
     `
 })
