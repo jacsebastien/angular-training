@@ -1,11 +1,8 @@
 // Give Component access to the angular core
-import { Component } from '@angular/core';
+import { Component }  from '@angular/core';
+// import the Hero class created in hero.ts file
+import { Hero } from './hero';
 
-// Create a class Hero
-export class Hero {
-  id: number;
-  name: string;
-}
 
 // HEROES array which is type of Hero
 const HEROES: Hero[] = [
@@ -29,22 +26,16 @@ const HEROES: Hero[] = [
     <h2>My Heroes</h2>
     <ul class="heroes">
       <!-- * is needed and indicates that <li> and children are a master template -->
+      <!-- Use proprety binding to add "selected" css class if hero === selectedHero -->
       <!-- call onSelect() method when we click on the <li> and pass the hero to the function -->
-      <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+      <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-
-    <!-- Show data of the selected hero only if selectedHero is initialized (we click on one hero)-->
-    <div *ngIf="selectedHero">
-      <h2>{{selectedHero.name}} details.</h2>
-      <div><label>id: </label>{{selectedHero.id}}</div>
-      <div>
-        <label>name: </label>
-        <!-- Use ngModel for 2 way data binding -->
-        <input [(ngModel)]="selectedHero.name" placeholder="name">
-      </div>
-    </div>
+    <!-- my-hero-detail tag bind data with the HeroDetailComponent and pass the selectedHero value to the hero property -->
+    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
     `,
   styles: [`
     .selected {
