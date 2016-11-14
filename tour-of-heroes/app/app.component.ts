@@ -1,12 +1,13 @@
+// Give Component access to the angular core
 import { Component } from '@angular/core';
 
 // Create a class Hero
 export class Hero {
   id: number;
-  name: String;
+  name: string;
 }
 
-// create an array named HEROES which is type of Hero
+// HEROES array which is type of Hero
 const HEROES: Hero[] = [
   { id: 11, name: 'Mr. Nice' },
   { id: 12, name: 'Narco' },
@@ -20,17 +21,30 @@ const HEROES: Hero[] = [
   { id: 20, name: 'Tornado' }
 ];
 
+// associate metadata with the AppComponent
 @Component({
   selector: 'my-app',
   template: `
     <h1>{{title}}</h1>
     <h2>My Heroes</h2>
     <ul class="heroes">
-      <!-- * is needed and indicates that li and children are a master template -->
-      <li *ngFor="let hero of heroes">
+      <!-- * is needed and indicates that <li> and children are a master template -->
+      <!-- call onSelect() method when we click on the <li> and pass the hero to the function -->
+      <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
+
+    <!-- Show data of the selected hero only if selectedHero is initialized (we click on one hero)-->
+    <div *ngIf="selectedHero">
+      <h2>{{selectedHero.name}} details.</h2>
+      <div><label>id: </label>{{selectedHero.id}}</div>
+      <div>
+        <label>name: </label>
+        <!-- Use ngModel for 2 way data binding -->
+        <input [(ngModel)]="selectedHero.name" placeholder="name">
+      </div>
+    </div>
     `,
   styles: [`
     .selected {
@@ -83,8 +97,24 @@ const HEROES: Hero[] = [
   `]
 })
 
+// control the appearance of the view
 export class AppComponent {
   title = 'Tour of Heroes';
-  // public property heroes which have the values of private HEROES
+  // public property heroes which has the values of private HEROES array already type of Hero
   heroes = HEROES;
+
+  // selectedHero property not initialized by default
+  selectedHero: Hero;
+
+  // method called when we click on a hero that recieved a Hero type var and return nothing
+  onSelect(hero: Hero): void {
+    // set selectedHero to the hero the user clicked
+    this.selectedHero = hero;
+  }
+
+  // initialized hero property type of Hero 
+  // hero: Hero = {
+  //   id: 1,
+  //   name: 'Windstorm'
+  // };
 }

@@ -9,8 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+// Web app so we need BrowserModule
 var platform_browser_1 = require('@angular/platform-browser');
+// To allow froms creation
 var forms_1 = require('@angular/forms');
+// import our custom AppComponent
 var app_component_1 = require('./app.component');
 var AppModule = (function () {
     function AppModule() {
