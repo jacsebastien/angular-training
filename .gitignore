@@ -1,6 +1,20 @@
-typings
-app/**/*.js
-app/**/*.map
+# Dependency directories
 node_modules
 jspm_packages
 bower_components
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Compiled outputs
+app/**/*.js
+app/**/*.map
+
+# Multiple projects in one git folder
+**/app/**/*.js
+**/app/**/*.map
+
+# Misc
+typings
