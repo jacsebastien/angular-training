@@ -1,22 +1,10 @@
 // Give Component access to the angular core
-import { Component }  from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
+
 // import the Hero class created in hero.ts file
-import { Hero } from './hero';
-
-
-// HEROES array which is type of Hero
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
+import { Hero }         from './hero';
+// import our custom service
+import { HeroService }  from './hero.service';
 
 // associate metadata with the AppComponent
 @Component({
@@ -85,17 +73,38 @@ const HEROES: Hero[] = [
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
+  // tell angular to create a fresh instance of HeroService when it create a new AppComponent
+  providers: [HeroService]
 })
 
 // control the appearance of the view
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Tour of Heroes';
-  // public property heroes which has the values of private HEROES array already type of Hero
-  heroes = HEROES;
-
+  // heroes array property type of Hero and not initialized by default
+  heroes: Hero[];
   // selectedHero property not initialized by default
   selectedHero: Hero;
+
+  // create an instance of HeroService stored in heroService proprety
+  constructor(private heroService: HeroService) {}
+
+  getHeroes(): void {
+    // use promises to get heroes from the service
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+    // equivalent to
+    // this.heroService.getHeroes().then(
+    //   function(heroes) {
+    //     this.heroes = heroes
+    //   }
+    // );
+  }
+  
+  // use the OnInit interface to initialize the component with some data
+  ngOnInit(): void {
+    // call the getHeroes method from this component
+    this.getHeroes();
+  }
 
   // method called when we click on a hero that recieved a Hero type var and return nothing
   onSelect(hero: Hero): void {
@@ -103,6 +112,9 @@ export class AppComponent {
     this.selectedHero = hero;
   }
 
+
+  // public property heroes which has the values of private HEROES array already type of Hero (moved to service)
+  // heroes = HEROES;
   // initialized hero property type of Hero 
   // hero: Hero = {
   //   id: 1,
