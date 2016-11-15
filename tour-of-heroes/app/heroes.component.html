@@ -1,0 +1,23 @@
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <!-- * is needed and indicates that <li> and children are a master template -->
+    <!-- Use proprety binding to add "selected" css class if hero === selectedHero -->
+    <!-- call onSelect() method when we click on the <li> and pass the hero to the function -->
+    <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </li>
+</ul>
+<div *ngIf="selectedHero">
+    <h2>
+        {{selectedHero.name | uppercase}} is my hero
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
+
+<!-- =============================================  
+    V1 all in one route
+-->
+<!-- my-hero-detail tag bind data with the HeroDetailComponent and pass the selectedHero value to the hero property -->
+<!-- <my-hero-detail [hero]="selectedHero"></my-hero-detail> -->

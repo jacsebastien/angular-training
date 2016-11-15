@@ -1,0 +1,15 @@
+<!-- Show data of the selected hero only if "hero" property is initialized (we click on one hero) -->
+<!-- hero proprety is set thx to the <my-hero-detail> tag in AppComponent -->
+<div *ngIf="hero">
+    <h2>{{hero.name}} details.</h2>
+    <div>
+        <label>ID: </label>{{hero.id}}
+    </div>
+    <div>
+        <label>name: </label>
+        <!-- Use ngModel for 2 way data binding -->
+        <input [(ngModel)]="hero.name" placeholder="name">
+    </div>
+    <!-- Call the goback function of our component -->
+    <button (click)="goBack()">Back</button>
+</div>

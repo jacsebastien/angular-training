@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+<nav>
+    <!-- angular link to navigate to a route define in AppModule -->
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <!-- routerLinkActive="active" set the class "active" if we are on the right view -->
+    <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+</nav>
+<!-- content of modules called by routes will appear below -->
+<router-outlet></router-outlet>
