@@ -1,4 +1,13 @@
 <h2>My Heroes</h2>
+<div>
+    <!-- #heroName is a reference variable which contain informations about the DOM element (here the input)-->
+    <label>Hero name:</label> <input type="text" placeholder="Enter a new name" #heroName />
+    <!-- we get the value of the input reference (avoid creating a NgModel) and clean it after-->
+    <button (click)="add(heroName.value); heroName.value=''">
+        Add
+    </button>
+</div>
+
 <ul class="heroes">
     <!-- * is needed and indicates that <li> and children are a master template -->
     <!-- Use proprety binding to add "selected" css class if hero === selectedHero -->
@@ -6,7 +15,11 @@
     <li *ngFor="let hero of heroes"
         [class.selected]="hero === selectedHero"
         (click)="onSelect(hero)">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
+        <span class="badge">{{hero.id}}</span> 
+        <span>{{hero.name}}</span>
+        <!-- call "click" event then stop propagation to avoid triggering the parent <li> "click" event -->
+        <button class="delete"
+            (click)="delete(hero); $event.stopPropagation()">x</button>
     </li>
 </ul>
 <div *ngIf="selectedHero">

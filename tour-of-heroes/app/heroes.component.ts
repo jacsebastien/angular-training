@@ -57,6 +57,35 @@ export class HeroesComponent implements OnInit {
     this.router.navigate(['/detail', this.selectedHero.id]);
   }
 
+  add(name: string): void {
+    // clean the entry name
+    name = name.trim();
+
+    // if name is blank stop the process
+    if (!name) { 
+      return; 
+    }
+
+    // let the service create the new hero inside the db
+    this.heroService.create(name)
+      .then(hero => {
+        // then add the new hero to the temp list of this view (avoid reloading the component to get the entire list)
+        this.heroes.push(hero);
+        this.selectedHero = null;
+      });
+  }
+
+  delete(hero: Hero): void {
+    this.heroService.delete(hero.id)
+        .then(() => {
+          // remove the selected hero from the temp array
+          this.heroes = this.heroes.filter(h => h !== hero);
+          // reset the selected hero if it's the deleted one
+          if (this.selectedHero === hero) { this.selectedHero = null; }
+        });
+  }
+
+
 
   // public property heroes which has the values of private HEROES array already type of Hero (moved to service)
   // heroes = HEROES;

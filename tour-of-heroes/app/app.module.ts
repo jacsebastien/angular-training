@@ -2,9 +2,14 @@ import { NgModule }       from '@angular/core';
 // Web app so we need BrowserModule
 import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
+import { HttpModule }     from '@angular/http';
 
 // the file which manage routes
 import { AppRoutingModule }     from './app-routing.module';
+
+// Imports for loading & configuring the in-memory web api (fake server)
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
 
 // import our custom AppComponent
 import { AppComponent }         from './app.component';
@@ -18,7 +23,10 @@ import { HeroService }          from './hero.service';
   imports: [ 
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule,
+    // InMemoryWebApiModule replaces the default Http client backend with data from InMemoryDataService
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   // list of all created components, pipes and directives
   declarations: [ 

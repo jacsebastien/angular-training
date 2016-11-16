@@ -8,8 +8,10 @@
     <div>
         <label>name: </label>
         <!-- Use ngModel for 2 way data binding -->
-        <input [(ngModel)]="hero.name" placeholder="name">
+        <input type="text" [(ngModel)]="hero.name" placeholder="name">
     </div>
-    <!-- Call the goback function of our component -->
+    <!-- For saving changes -->
+    <button (click)="save()">Save</button>
+    <!-- Call the goBack() function of our component -->
     <button (click)="goBack()">Back</button>
 </div>

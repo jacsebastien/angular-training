@@ -46,6 +46,15 @@ export class HeroDetailComponent implements OnInit {
     goBack(): void {
       this.location.back();
     }
+
+	// call the update method of HeroService which update data on the server
+    save(): void {
+		// send the updated hero to the method
+      	this.heroService.update(this.hero)
+		  	// then go back to the previous view
+        	.then(() => this.goBack());
+    }
+
 }
 
 // ================================================================
