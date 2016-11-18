@@ -4,6 +4,9 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 
+// file with all the rxjs imports needed in our application
+import './rxjs-extensions';
+
 // the file which manage routes
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -17,6 +20,7 @@ import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroesComponent }      from './heroes.component';
 import { DashboardComponent }   from './dashboard.component';
 import { HeroService }          from './hero.service';
+import { HeroSearchComponent }  from './hero-search.component';
 
 @NgModule({
   //  list of angular native modules and created ones (like routing)
@@ -33,7 +37,8 @@ import { HeroService }          from './hero.service';
     AppComponent,
     HeroesComponent,
     HeroDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroSearchComponent
   ],
   // list of services needed to manage data from db/files/... available to ALL components
   providers: [ HeroService ],
