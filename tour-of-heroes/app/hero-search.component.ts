@@ -11,7 +11,8 @@ import { Hero }                 from './hero';
   selector: 'hero-search',
   templateUrl: 'hero-search.component.html',
   styleUrls: [ 'hero-search.component.css' ],
-  providers: [HeroSearchService]
+  // HeroSearchService in component providers instead of AppModule because we need it only in this component
+  providers: [ HeroSearchService ]
 })
 
 export class HeroSearchComponent implements OnInit {
