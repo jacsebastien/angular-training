@@ -1,33 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 
+// services need to be added in app.module.providers too
+import { CollectableService } from '../shared/collectable.service';
+import { Collectable } from '../shared/collectable.model';
+
+
 @Component({
-  selector: 'app-market',
-  templateUrl: './market.component.html',
-  styleUrls: []
+    selector: 'app-market',
+    templateUrl: './market.component.html',
+    styleUrls: []
 })
 export class MarketComponent implements OnInit {
-  collectables = [
-    {
-      description: 'Build your city',
-      type: 'Management'
-    },
-    {
-      description: 'Customize your car and win races',
-      type: 'Race'
-    },
-    {
-      description: 'Create your character, do some quests and earn xp and gold',
-      type: 'MMORPG'
+    collectables: Collectable[] = [];
+
+    onAddToCollection(item: Collectable) {
+        this.collectableService.addToCollection(item);
     }
-  ];
 
-  onAddToCollection() {
-    alert('Yo !');
-  }
+    // at the creation of the component call the CollectableService and stock it in a private property
+    constructor(private collectableService: CollectableService) {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+    ngOnInit() {
+        // get data from the CollectableService and store them in the collectables array
+        this.collectables = this.collectableService.getCollectables();
+    }
 
 }
+
