@@ -5,8 +5,7 @@ import { Collectable } from '../shared/collectable.model';
 
 @Component({
     selector: 'app-collection',
-    templateUrl: './collection.component.html',
-    styleUrls: []
+    templateUrl: './collection.component.html'
 })
 export class CollectionComponent implements OnInit {
     collectedItems: Collectable[] = [];

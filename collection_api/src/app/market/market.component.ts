@@ -7,8 +7,7 @@ import { Collectable } from '../shared/collectable.model';
 
 @Component({
     selector: 'app-market',
-    templateUrl: './market.component.html',
-    styleUrls: []
+    templateUrl: './market.component.html'
 })
 export class MarketComponent implements OnInit {
     collectables: Collectable[] = [];
@@ -26,4 +25,3 @@ export class MarketComponent implements OnInit {
     }
 
 }
-
