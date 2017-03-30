@@ -19,6 +19,7 @@ export class CollectableService {
         }
     ];
 
+    // Collection of items that the user will choose
     private collection: Collectable[] = [];
 
     // public function to get content of private properties
@@ -32,11 +33,9 @@ export class CollectableService {
 
     addToCollection(item: Collectable) {
         // if he is already in the collection, just return and do nothing
-        if(this.collection.indexOf(item) !== -1){
-            return;
+        if(this.collection.indexOf(item) === -1){
+            this.collection.push(item);
         }
-
-        this.collection.push(item);
     }
 
     removeFromCollection(item: Collectable) {

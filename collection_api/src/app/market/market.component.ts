@@ -12,6 +12,7 @@ import { Collectable } from '../shared/collectable.model';
 export class MarketComponent implements OnInit {
     collectables: Collectable[] = [];
 
+    // method called from the html
     onAddToCollection(item: Collectable) {
         this.collectableService.addToCollection(item);
     }

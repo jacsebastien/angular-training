@@ -7,6 +7,7 @@ import { CollectionComponent } from './collection/collection.component';
 
 import { CollectableService } from './shared/collectable.service';
 import { HeaderComponent } from './header.component';
+import { routing } from './app.routing';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HeaderComponent } from './header.component';
     ],
     imports: [
         BrowserModule,
+        routing
     ],
     providers: [CollectableService],
     bootstrap: [AppComponent]

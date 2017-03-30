@@ -12,14 +12,8 @@ const APP_ROUTES: Routes = [
         // use this route only if the complete path math to nothing => is empty
         pathMatch: 'full'
     },
-    {
-        path: 'collection',
-        component: CollectionComponent
-    },
-    {
-        path: 'market',
-        component: MarketComponent
-    }
+    { path: 'collection', component: CollectionComponent },
+    { path: 'market', component: MarketComponent }
 ];
 
 // register routes as a route module and store it in an exported "routing" property

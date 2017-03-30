@@ -1,8 +1,10 @@
 <div class="row">
     <div class="col-xs-12">
         <ul class="nav nav-pills">
-            <li><a href="#">Collection</a></li>
-            <li><a href="#">Market</a></li>
+            <!-- [routerLink] is a directive and we can pass data to it -->
+            <!-- routerLinkActive="active" add class="active" to the active link -->
+            <li routerLinkActive="active"><a [routerLink]="['/collection']">Collection</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/market']">Market</a></li>
         </ul>
     </div>
 </div>
