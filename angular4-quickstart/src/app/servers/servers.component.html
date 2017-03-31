@@ -30,5 +30,6 @@
 <ng-template #noServer>
   <p>No server was created !</p>
 </ng-template>-->
-<app-server></app-server>
-<app-server></app-server>
+
+<!-- loop inside the servers array and create and app-server component for each one -->
+<app-server *ngFor="let server of servers"></app-server>
