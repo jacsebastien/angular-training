@@ -32,4 +32,7 @@
 </ng-template>-->
 
 <!-- loop inside the servers array and create and app-server component for each one -->
-<app-server *ngFor="let server of servers"></app-server>
+<app-server 
+  *ngFor="let server of servers; let i = index"
+  [ngStyle]="{color: i >= 4 ? 'blue' : 'black'}">
+</app-server>
