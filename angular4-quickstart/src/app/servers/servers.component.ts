@@ -9,6 +9,7 @@ export class ServersComponent implements OnInit {
   allowNewServer = false;
   serverCreationStatus = "No server was created!";
   serverName = 'Example Server';
+  serverCreated = false;
 
   constructor() { 
     // change the value of allowNewServer after 2s
@@ -22,6 +23,7 @@ export class ServersComponent implements OnInit {
 
   // methot that will be triggered on DOM event (like mouse click)
   onCreateServer() {
+    this.serverCreated = true;
     this.serverCreationStatus = "Server was created! Name is " + this.serverName;
   }
 
