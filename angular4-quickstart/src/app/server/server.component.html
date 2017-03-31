@@ -1,1 +1,3 @@
-<p>Server with ID {{ serverId }} is {{ getServerStatus() }}  </p>
+<!-- bind some properties on to the directive ngStyle -->
+<!-- call a method to get value of the background color-->
+<p [ngStyle]="{backgroundColor: getColor()}">Server with ID {{ serverId }} is {{ getServerStatus() }}  </p>
