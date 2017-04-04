@@ -8,7 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ServerElementComponent implements OnInit {
   // define property type of object without any value
   // @Input() decorator expose the property and allow parents component to access to it and edit it
-  @Input() element: {type: string, name: string, content: string};
+  // add an alias for the property name used outside the component (srvElement)
+  @Input('srvElement') element: {type: string, name: string, content: string};
 
   constructor() { }
 
