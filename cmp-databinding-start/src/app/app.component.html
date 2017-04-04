@@ -1,12 +1,15 @@
 <div class="container">
-  <app-cokpit></app-cokpit>
+  <!-- call onServerAdded and onBlueprintAdded from serverCreated and blueprintCreated events emitter binded to cokpit component -->
+  <app-cokpit 
+    (serverCreated)="onServerAdded($event)"
+    (blueprintCreated)="onBlueprintAdded($event)"></app-cokpit>
   <hr>
   <div class="row">
     <div class="col-xs-12">
+      <!-- bind serverElement to srvElement property of server-element component -->      
       <app-server-element 
         *ngFor="let serverElement of serverElements"
         [srvElement]="serverElement"></app-server-element>
-        <!-- bind serverElement to exposed element property of server-element component -->
     </div>
   </div>
 </div>

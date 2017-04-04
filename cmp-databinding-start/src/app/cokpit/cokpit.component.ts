@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-cokpit',
@@ -6,6 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cokpit.component.css']
 })
 export class CokpitComponent implements OnInit {
+  // properties type of EventEmitter (for event binding) and define the type of data that will be emit
+  // @Output() allow properties to be listenend by parent component
+  @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>(); // () for calling the constructor
+  @Output() blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+  // EventEmitter is an object in angular that allow us to emitour own events
+
   newServerName = '';
   newServerContent = '';
 
@@ -15,18 +21,17 @@ export class CokpitComponent implements OnInit {
   }
 
   onAddServer() {
-    // this.serverElements.push({
-    //   type: 'server',
-    //   name: this.newServerName,
-    //   content: this.newServerContent
-    // });
+    // affect new data (from data binding between view and component) to the EventEmitter properties
+      this.serverCreated.emit({
+        serverName: this.newServerName,
+        serverContent: this.newServerContent
+      })
   }
 
   onAddBlueprint() {
-    // this.serverElements.push({
-    //   type: 'blueprint',
-    //   name: this.newServerName,
-    //   content: this.newServerContent
-    // });
+      this.blueprintCreated.emit({
+        serverName: this.newServerName,
+        serverContent: this.newServerContent
+      })
   }
 }
