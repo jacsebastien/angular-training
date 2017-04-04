@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-cokpit',
@@ -13,7 +13,10 @@ export class CokpitComponent implements OnInit {
   // EventEmitter is an object in angular that allow us to emitour own events
 
   // newServerName = '';
-  newServerContent = '';
+  // newServerContent = '';
+
+  // access to the serverContentInput local reference inside typescript component
+  @ViewChild('serverContentInput') serverContentInput: ElementRef;
 
   constructor() { }
 
@@ -22,16 +25,17 @@ export class CokpitComponent implements OnInit {
 
   onAddServer(nameInput: HTMLInputElement) {
     // affect new data to the EventEmitter properties from the input value passed to the method 
+    //  and from the value of the local reference fetched through @ViewChild
       this.serverCreated.emit({
         serverName: nameInput.value,
-        serverContent: this.newServerContent
+        serverContent: this.serverContentInput.nativeElement.value
       })
   }
 
   onAddBlueprint(nameInput: HTMLInputElement) {
       this.blueprintCreated.emit({
         serverName: nameInput.value,
-        serverContent: this.newServerContent
+        serverContent: this.serverContentInput.nativeElement.value
       })
   }
 }

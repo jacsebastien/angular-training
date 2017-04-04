@@ -13,7 +13,11 @@
       #serverNameInput> 
       
     <label>Server Content</label>
-    <input type="text" class="form-control" [(ngModel)]="newServerContent">
+    <!--<input type="text" class="form-control" [(ngModel)]="newServerContent">-->
+    <input 
+      type="text" 
+      class="form-control"
+      #serverContentInput>
     <br>
     <!-- pass the local reference  of the input to the method called by the click event -->
     <button
