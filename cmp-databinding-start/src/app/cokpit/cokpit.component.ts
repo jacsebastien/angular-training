@@ -12,7 +12,7 @@ export class CokpitComponent implements OnInit {
   @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
   // EventEmitter is an object in angular that allow us to emitour own events
 
-  newServerName = '';
+  // newServerName = '';
   newServerContent = '';
 
   constructor() { }
@@ -20,17 +20,17 @@ export class CokpitComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddServer() {
-    // affect new data (from data binding between view and component) to the EventEmitter properties
+  onAddServer(nameInput: HTMLInputElement) {
+    // affect new data to the EventEmitter properties from the input value passed to the method 
       this.serverCreated.emit({
-        serverName: this.newServerName,
+        serverName: nameInput.value,
         serverContent: this.newServerContent
       })
   }
 
-  onAddBlueprint() {
+  onAddBlueprint(nameInput: HTMLInputElement) {
       this.blueprintCreated.emit({
-        serverName: this.newServerName,
+        serverName: nameInput.value,
         serverContent: this.newServerContent
       })
   }

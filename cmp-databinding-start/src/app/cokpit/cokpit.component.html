@@ -2,15 +2,25 @@
   <div class="col-xs-12">
     <p>Add new Servers or blueprints!</p>
     <label>Server Name</label>
-    <input type="text" class="form-control" [(ngModel)]="newServerName">
+    <!--<input type="text" class="form-control" [(ngModel)]="newServerName">-->
+    <!-- 
+      #serverNameInput =  local reference to the input element with all his propreties
+                          can be used everywhere in the template but ONLY in the template 
+    -->
+    <input 
+      type="text" 
+      class="form-control"
+      #serverNameInput> 
+      
     <label>Server Content</label>
     <input type="text" class="form-control" [(ngModel)]="newServerContent">
     <br>
+    <!-- pass the local reference  of the input to the method called by the click event -->
     <button
       class="btn btn-primary"
-      (click)="onAddServer()">Add Server</button>
+      (click)="onAddServer(serverNameInput)">Add Server</button>
     <button
       class="btn btn-primary"
-      (click)="onAddBlueprint()">Add Server Blueprint</button>
+      (click)="onAddBlueprint(serverNameInput)">Add Server Blueprint</button>
   </div>
 </div>
