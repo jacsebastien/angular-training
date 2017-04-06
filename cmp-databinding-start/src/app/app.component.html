@@ -6,10 +6,12 @@
   <hr>
   <div class="row">
     <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirst()">Change First Element</button>
       <!-- bind serverElement to srvElement property of server-element component -->      
       <app-server-element 
         *ngFor="let serverElement of serverElements"
-        [srvElement]="serverElement">
+        [srvElement]="serverElement"
+        [name]="serverElement.name">
         <!-- content that will be proected into the component -->
         <p>
           <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>

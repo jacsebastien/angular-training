@@ -7,11 +7,10 @@ import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '
 })
 export class CokpitComponent implements OnInit {
   // properties type of EventEmitter (for event binding) and define the type of data that will be emit
+  // EventEmitter is an object in angular that allow us to emit our own events  
   // @Output() allow properties to be listenend by parent component
   @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>(); // () for calling the constructor
   @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
-  // EventEmitter is an object in angular that allow us to emitour own events
-
   // newServerName = '';
   // newServerContent = '';
 
@@ -21,6 +20,7 @@ export class CokpitComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   onAddServer(nameInput: HTMLInputElement) {
