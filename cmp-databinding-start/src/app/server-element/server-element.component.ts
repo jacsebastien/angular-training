@@ -4,7 +4,13 @@ import {
   Input, 
   ViewEncapsulation, 
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
+  DoCheck,
+  AfterContentChecked, 
+  AfterContentInit, 
+  AfterViewChecked, 
+  AfterViewInit,
+  OnDestroy
 } from '@angular/core';
 
 @Component({
@@ -15,7 +21,15 @@ import {
   // None disable the default Emulated encapsulation that create DOM tags propeties to know which view come from whic component and apply css only on it
   // Native use the DOM shadow not supported by all browsers
 })
-export class ServerElementComponent implements OnInit, OnChanges {
+export class ServerElementComponent implements 
+  OnInit, 
+  OnChanges, 
+  DoCheck, 
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy {
   // define property type of object without any value
   // @Input() decorator expose the property and allow parents component to access to it and edit it
   // add an alias for the property name used outside the component (srvElement)
@@ -35,4 +49,28 @@ export class ServerElementComponent implements OnInit, OnChanges {
     console.log('ngOnInit called');
   }
 
+  ngDoCheck() {
+    console.log("ngDoCheck called");
+  }
+
+  ngAfterContentInit() {
+    console.log('ngAfterContentInit called');
+  }
+
+  ngAfterContentChecked() {
+    console.log('ngAfterContentChecked called');
+    
+  }
+
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit called');
+  }
+
+  ngAfterViewChecked() {
+    console.log('ngAfterViewChecked called');
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy called');
+  }
 }
