@@ -18,7 +18,17 @@
           </li>
         </div>
           
-        <div *ngIf="!onlyOdd">
+        <!--<div *ngIf="!onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{odd: even % 2 !== 0}"        
+            [ngStyle]="{backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'}"                
+            *ngFor="let even of evenNumbers">
+            {{ even }}
+          </li>
+        </div>-->
+        <!-- call custom structural directive to show list only if onlyOff is false (check is done inside the directive) -->
+        <div *appUnless="onlyOdd">
           <li
             class="list-group-item"
             [ngClass]="{odd: even % 2 !== 0}"        
