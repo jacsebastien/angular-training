@@ -47,7 +47,15 @@
       <!--<p [appBetterHighlight]="'red'" [defaultColor]="'yellow'">Style me with a better directive !</p>-->
 
       <!-- If we pass a string to the property we can remove [] and '' but it's a property binding anyway -->
-      <p [appBetterHighlight]="'red'" defaultColor="yellow">Style me with a better directive !</p>      
+      <p [appBetterHighlight]="'red'" defaultColor="yellow">Style me with a better directive !</p>     
+
+      <!-- ngSwitch property binding -->
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">Value is 5</p>
+        <p *ngSwitchCase="10">Value is 10</p>
+        <p *ngSwitchCase="100">Value is 100</p>
+        <p *ngSwitchDefault>Value is Default</p>
+      </div> 
     </div>
   </div>
 </div>
