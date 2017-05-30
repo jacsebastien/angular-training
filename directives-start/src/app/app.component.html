@@ -29,7 +29,15 @@
         </div>
       </ul>
       <p appBasicHighlight>Style me with basic directive !</p>
-      <p appBetterHighlight>Style me with a better directive !</p>
+      <!-- call the custom directive "appBetterHighlight" and bind it properties -->
+      <!--<p appBetterHighlight [defaultColor]="'yellow'" [highlightColor]="'red'">Style me with a better directive !</p>-->
+
+      <!-- If we defined an alias : -->
+      <!-- call the custom directive "appBetterHighlight" with "red" binded to it's alias and "yellow" to default color -->
+      <!--<p [appBetterHighlight]="'red'" [defaultColor]="'yellow'">Style me with a better directive !</p>-->
+
+      <!-- If we pass a string to the property we can remove [] and '' but it's a property binding anyway -->
+      <p [appBetterHighlight]="'red'" defaultColor="yellow">Style me with a better directive !</p>      
     </div>
   </div>
 </div>
