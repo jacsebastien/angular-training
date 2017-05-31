@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { LoggingService } from './logging.service';
 
 // tell Angular that we want to inject something in this service to allow us to get instance of an other service like LoggingService
@@ -18,6 +18,8 @@ export class AccountService {
       status: 'unknown'
     }
   ];
+
+  statusUpdated = new EventEmitter<string>();
 
   constructor(private loggingService: LoggingService) {}
 

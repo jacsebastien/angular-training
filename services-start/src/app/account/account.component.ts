@@ -15,5 +15,8 @@ export class AccountComponent {
 
   onSetTo(status: string) {
     this.accountService.updateAccount(this.id, status);
+
+    // user the emitter of the accountService to emit the status without passing it into components
+    this.accountService.statusUpdated.emit(status);
   }
 }
