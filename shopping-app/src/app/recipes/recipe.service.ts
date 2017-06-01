@@ -1,7 +1,10 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
+import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 import { Ingredient } from './../shared/ingredient.model';
 
+// need to have @Injectable decorator to be able to inject services on it
+@Injectable()
 export class RecipeService {
     // create an event emitter which get/return the value of selected recipe
     recipeSelected = new EventEmitter<Recipe>();
@@ -25,8 +28,15 @@ export class RecipeService {
             ])
     ];
 
+    // inject the shopping list service to get access to the list in this service
+    constructor(private slService: ShoppingListService) {}
+
     getRecipes() {
         // .slice() recreate a new copy of the "recipes" array to not return an instance of this array
         return this.recipes.slice();
+    }
+
+    addIngredientsToSl(ingredients: Ingredient[]) {
+        this.slService.addIngredients(ingredients);
     }
 }
