@@ -1,4 +1,4 @@
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
@@ -12,7 +12,8 @@ export class ServerComponent implements OnInit {
     server: { id: number, name: string, status: string };
 
     constructor(private serversService: ServersService,
-                private route: ActivatedRoute) { }
+                private route: ActivatedRoute,
+                private router: Router) { }
 
     ngOnInit() {
         // user "+" operator to convert the id passed like a string to a number
@@ -27,6 +28,13 @@ export class ServerComponent implements OnInit {
                     this.server = this.serversService.getServer(+params['id']);
                 }
             );
+    }
+
+    onEdit() {
+        // tell to navigate to edit relative to the active route which is /servers/:id 
+        // => (/servers/:id/edit) 
+        // queryParamsHandling allow to preserve previous queryParams in the url
+        this.router.navigate(['edit'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
     }
 
 }
