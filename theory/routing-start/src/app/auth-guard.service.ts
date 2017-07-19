@@ -1,4 +1,9 @@
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, 
+    CanActivate, 
+    Router, 
+    RouterStateSnapshot,
+    CanActivateChild
+} from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -6,7 +11,7 @@ import { AuthService } from './auth.service';
 
 // allow to inject services inside this one
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
     // import service which fake authentication system
     constructor(private authService: AuthService,
                 private router: Router) {}
@@ -30,5 +35,11 @@ export class AuthGuard implements CanActivate {
                 }
             }
         );
+    }
+
+    // used to check if child of the selected route ca be visited or not and not the route itselfe
+    canActivateChild(route: ActivatedRouteSnapshot,
+                state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+        return this.canActivate(route, state);
     }
 }

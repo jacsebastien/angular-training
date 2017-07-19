@@ -18,7 +18,12 @@ const appRoutes: Routes = [
         { path: ':id/:name', component: UserComponent },
     ] },
     // use AuthGuard service to manage access to servers route and all his children
-    { path: 'servers', canActivate: [AuthGuard] , component: ServersComponent, children: [
+    { 
+        path: 'servers', 
+        // canActivate: [AuthGuard] ,
+        canActivateChild: [AuthGuard], 
+        component: ServersComponent, 
+        children: [
         // nested route /servers/:id
         { path: ':id', component: ServerComponent },
         { path: ':id/edit', component: EditServerComponent }
