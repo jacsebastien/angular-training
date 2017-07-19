@@ -1,21 +1,28 @@
-import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { ServersService } from '../servers.service';
+import { CanComponentDeactivate } from "app/servers/edit-server/can-deactivate-guard.service";
+import { Observable } from "rxjs/Observable";
 
 @Component({
     selector: 'app-edit-server',
     templateUrl: './edit-server.component.html',
     styleUrls: ['./edit-server.component.css']
 })
-export class EditServerComponent implements OnInit {
+// implements CanComponentDeactivate interface to force our component to use canDeactivate method
+export class EditServerComponent implements OnInit, CanComponentDeactivate {
     server: { id: number, name: string, status: string };
     serverName = '';
     serverStatus = '';
     allowEdit = false;
+    // used to know if we change something without saving it
+    changesSaved = false;
 
     constructor(private serversService: ServersService,
-                private route: ActivatedRoute) { }
+                private route: ActivatedRoute,
+                private router: Router) {         
+    }
 
     ngOnInit() {
         // get dirct access to data sent in the url on component creation
@@ -38,6 +45,15 @@ export class EditServerComponent implements OnInit {
 
     onUpdateServer() {
         this.serversService.updateServer(this.server.id, { name: this.serverName, status: this.serverStatus });
+        // make changes as saved
+        this.changesSaved = true;
+        // navigate to the parent route
+        this.router.navigate(['../'], {relativeTo: this.route});
     }
+
+    // // use canDeactivate method implemented with CanComponentDeactivate interface to know if our
+    // canDeactivate(): Observable<boolean> | Promise<boolean> | boolean; {
+        
+    // }
 
 }

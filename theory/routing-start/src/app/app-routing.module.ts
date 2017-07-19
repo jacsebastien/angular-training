@@ -11,6 +11,7 @@ import { ServersComponent } from './servers/servers.component';
 import { ServersService } from './servers/servers.service';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users.component';
+import { CanDeactivateGuard } from "app/servers/edit-server/can-deactivate-guard.service";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
         children: [
         // nested route /servers/:id
         { path: ':id', component: ServerComponent },
-        { path: ':id/edit', component: EditServerComponent }
+        // use CanDeactivateGuard service to check if we can leave the route or not
+        { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }
     ] },
     { path:'not-found', component: PageNotFoundComponent },
     // redirect all unknown routes to an existing route by using wildcards and providing the redirect url
