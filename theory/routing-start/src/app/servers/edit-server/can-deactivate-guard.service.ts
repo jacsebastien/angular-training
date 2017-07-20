@@ -1,7 +1,11 @@
 import { Observable } from 'rxjs/Observable';
-import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { 
+    CanDeactivate, 
+    ActivatedRouteSnapshot, 
+    RouterStateSnapshot 
+} from '@angular/router';
 
-// interface is a sort of contract imported by one other class which force this class to make some logic
+// interface is a sort of contract imported by one other class which force this class to provide some logic
 export interface CanComponentDeactivate {
     // method that take no argument and return boolean/Promise/Observable
     canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;

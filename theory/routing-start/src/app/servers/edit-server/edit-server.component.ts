@@ -37,8 +37,9 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
                 }
             );
         this.route.fragment.subscribe();
-
-        this.server = this.serversService.getServer(1);
+        const id = +this.route.snapshot.params['id'];
+        this.server = this.serversService.getServer(id);
+        // TODO: Subscribe route params to update id if params change
         this.serverName = this.server.name;
         this.serverStatus = this.server.status;
     }
@@ -51,9 +52,20 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
         this.router.navigate(['../'], {relativeTo: this.route});
     }
 
-    // // use canDeactivate method implemented with CanComponentDeactivate interface to know if our
-    // canDeactivate(): Observable<boolean> | Promise<boolean> | boolean; {
-        
-    // }
+    // use canDeactivate method implemented with CanComponentDeactivate interface to know if our
+    canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+        // if not allowed to edit, no edit is done so user can leave the view anyway
+        if(!this.allowEdit) {
+            return true;
+        }
+        // if one of the informations about server is changed AND changes are not saved
+        if((this.serverName !== this.server.name || this.serverStatus !== this.server.status) && !this.changesSaved) {
+            // ask the the user and retrun is resopnse
+            return confirm("Do youwant to discard your changes?");
+        // if nothings changed of if changes were saved
+        } else {
+            return true;
+        }
+    }
 
 }
