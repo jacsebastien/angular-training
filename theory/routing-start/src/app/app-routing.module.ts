@@ -1,3 +1,4 @@
+import { ServerResolver } from './servers/server/server-resolver.service';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { ServersService } from './servers/servers.service';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users.component';
 import { CanDeactivateGuard } from "app/servers/edit-server/can-deactivate-guard.service";
+import { ErrorPageComponent } from "app/error-page/error-page.component";
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -26,11 +28,14 @@ const appRoutes: Routes = [
         component: ServersComponent, 
         children: [
         // nested route /servers/:id
-        { path: ':id', component: ServerComponent },
+        // server from ServerResolver is stored in server property
+        { path: ':id', component: ServerComponent, resolve: {server: ServerResolver} },
         // use CanDeactivateGuard service to check if we can leave the route or not
         { path: ':id/edit', component: EditServerComponent, canDeactivate: [CanDeactivateGuard] }
     ] },
-    { path:'not-found', component: PageNotFoundComponent },
+    // { path:'not-found', component: PageNotFoundComponent },
+    // call ErrorPageComponent for 'not-found' route and send it data to manage error message
+    { path:'not-found', component: ErrorPageComponent, data: {message: "Page not found!"} },
     // redirect all unknown routes to an existing route by using wildcards and providing the redirect url
     // use pathMatch: 'full' to be sure that the entierely path match with no known route
     { path:'**', redirectTo: '/not-found', pathMatch: 'full' },
