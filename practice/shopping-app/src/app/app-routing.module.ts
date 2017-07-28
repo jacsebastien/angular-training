@@ -3,10 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 
 const appRoutes: Routes = [
     { path:'', redirectTo: '/recipes', pathMatch: 'full' }, //when the ALL path is empty, redirect to /recipes
-    { path: 'recipes', component: RecipesComponent }, // /recipes
+    { path: 'recipes', component: RecipesComponent, children: [
+        { path: '', component: RecipeStartComponent },
+        { path: ':id', component: RecipeDetailComponent }
+    ] }, // /recipes
     { path: 'shopping-list', component: ShoppingListComponent }
 ];
 
