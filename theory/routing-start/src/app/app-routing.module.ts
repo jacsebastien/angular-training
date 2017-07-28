@@ -47,6 +47,7 @@ const appRoutes: Routes = [
         // enable hashtag mode for routes in place of slashes
         // RouterModule.forRoot(appRoutes, {useHash: true})
     ],
+    // exports it to have access in mail app.module
     exports: [RouterModule]
 })
 export class AppRoutingModule {
