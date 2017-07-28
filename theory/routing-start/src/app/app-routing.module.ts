@@ -44,6 +44,8 @@ const appRoutes: Routes = [
 @NgModule({
     imports: [
         RouterModule.forRoot(appRoutes)
+        // enable hashtag mode for routes in place of slashes
+        // RouterModule.forRoot(appRoutes, {useHash: true})
     ],
     exports: [RouterModule]
 })
