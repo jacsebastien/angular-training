@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+a {
+    /* to have a hand even if we remove "href" */
+    cursor: pointer;
+}
