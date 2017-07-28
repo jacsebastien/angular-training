@@ -1,3 +1,4 @@
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -10,7 +11,10 @@ const appRoutes: Routes = [
     { path:'', redirectTo: '/recipes', pathMatch: 'full' }, //when the ALL path is empty, redirect to /recipes
     { path: 'recipes', component: RecipesComponent, children: [
         { path: '', component: RecipeStartComponent },
-        { path: ':id', component: RecipeDetailComponent }
+        // new need to be before :id to avoid Angular confusing between route part and parameter
+        { path: 'new', component: RecipeEditComponent },
+        { path: ':id', component: RecipeDetailComponent },
+        { path: ':id/edit', component: RecipeEditComponent }
     ] }, // /recipes
     { path: 'shopping-list', component: ShoppingListComponent }
 ];
