@@ -1,26 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';   // needed to work with Observable operators like "interval"
 import { Observer } from "rxjs/Observer";
+import { Subscription } from "rxjs/Subscription";
+import 'rxjs/Rx';   // needed to work with Observable operators like "interval"
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+    numbersObsSubscription: Subscription;
+    custombsSubscription: Subscription;
 
     constructor() { }
 
     ngOnInit() {
-        // // create an observable which emit numbers each seconds
-        // const myNumbers = Observable.interval(1000);
+        // create an observable which emit numbers each seconds
+        const myNumbers = Observable.interval(1000);
 
-        // myNumbers.subscribe(
-        //     (number: number) => {
-        //         console.log(number);
-        //     }
-        // );
+        this.numbersObsSubscription = myNumbers.subscribe(
+            (number: number) => {
+                console.log(number);
+            }
+        );
 
         // build a bridge between observable and observer to know whenever it's fired
         // observer return a string
@@ -41,7 +45,7 @@ export class HomeComponent implements OnInit {
             }, 5000);
         });
 
-        myObservable.subscribe(
+        this.custombsSubscription = myObservable.subscribe(
             (data: string) => {
                 console.log(data);
             }, (error: string) => {
@@ -52,4 +56,9 @@ export class HomeComponent implements OnInit {
         );
     }
 
+    ngOnDestroy() {
+        // unsubscribe to observables to destroy them
+        this.numbersObsSubscription.unsubscribe();
+        this.custombsSubscription.unsubscribe();
+    }
 }
