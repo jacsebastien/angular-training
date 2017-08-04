@@ -1,24 +1,41 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!-- 
+          With form module imported in app.module, Angular automatically creates a javascript object which represents the form whenever it detects form tags -->
       <form>
         <div id="user-data">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" class="form-control">
+            <!-- ngModel tells Angular that this input is part of the form Angular will automatically uses name attribute to define it -->
+            <input 
+                type="text" 
+                id="username" 
+                class="form-control"
+                ngModel
+                name="username">
           </div>
           <button class="btn btn-default" type="button">Suggest an Username</button>
           <div class="form-group">
             <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control">
+            <input 
+                type="email" 
+                id="email" 
+                class="form-control"
+                ng-model
+                name="email">
           </div>
         </div>
         <div class="form-group">
-          <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control">
-            <option value="pet">Your first Pet?</option>
-            <option value="teacher">Your first teacher?</option>
-          </select>
+            <label for="secret">Secret Questions</label>
+            <select 
+                id="secret" 
+                class="form-control"
+                ng-model
+                name="secret">
+                <option value="pet">Your first Pet?</option>
+                <option value="teacher">Your first teacher?</option>
+            </select>
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
