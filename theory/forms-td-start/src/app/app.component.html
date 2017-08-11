@@ -20,7 +20,9 @@
                     name="username"
                     required>
             </div>
+
             <button class="btn btn-default" type="button">Suggest an Username</button>
+            
             <div class="form-group">
                 <!-- "email" is a directive made by angular to be sure that it's a valid email address  -->
                 <label for="email">Mail</label>
@@ -37,9 +39,10 @@
                 <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email !</span>
             </div>
         </div>
+        
         <div class="form-group">
             <label for="secret">Secret Questions</label>
-            <!-- bind ngModel property to a property value defined in ts -->
+            <!-- one way binding on ngModel property to define a default value -->
             <select 
                 id="secret" 
                 class="form-control"
@@ -49,6 +52,18 @@
                 <option value="teacher">Your first teacher?</option>
             </select>
         </div>
+
+        <!-- two way binding on ngModel instantly get value -->
+        <div class="form-group">
+            <textarea 
+                name="questionAnswer"
+                rows="3"
+                class="form-control"
+                [(ngModel)]="answer"></textarea>
+        </div>
+
+        <p>Your reply: {{answer}}</p>
+
         <!-- disabled the button if the form is not valid  -->
         <button 
             class="btn btn-primary" 
