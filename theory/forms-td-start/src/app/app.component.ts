@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NgForm } from "@angular/forms";
 
 @Component({
@@ -7,12 +7,19 @@ import { NgForm } from "@angular/forms";
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    @ViewChild('f') signupForm: NgForm;
+
     suggestUserName() {
         const suggestedName = 'Superuser';
     }
 
     // triggered when the form is submitted and get reference to it for arguments
-    onSubmit(form: NgForm) {
-        console.log(form);
+    // onSubmit(form: NgForm) {
+    //     console.log(form);
+    // }
+
+    // access to the form without passing argument thx to ViewChild
+    onSubmit() {
+        console.log(this.signupForm);
     }
 }
