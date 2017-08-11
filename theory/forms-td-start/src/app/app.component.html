@@ -8,7 +8,11 @@
         And tell that the reference need to be the form element created by angular to represent data
     -->
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-        <div id="user-data">
+        <!-- group properties in angular form object and add a local reference to it for easy access -->
+        <div 
+            id="user-data" 
+            ngModelGroup="userData"
+            #userData="ngModelGroup">
             <div class="form-group">
                 <label for="username">Username</label>
                 <!-- ngModel tells Angular that this input is part of the form Angular will automatically uses name attribute to define it -->
@@ -39,7 +43,8 @@
                 <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email !</span>
             </div>
         </div>
-        
+        <p *ngIf="!userData.valid && userData.touched">User Data is invalid !</p>
+
         <div class="form-group">
             <label for="secret">Secret Questions</label>
             <!-- one way binding on ngModel property to define a default value -->
