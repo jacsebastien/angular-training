@@ -15,6 +15,23 @@ export class AppComponent {
 
     suggestUserName() {
         const suggestedName = 'Superuser';
+        // set all values of the form
+        // this.signupForm.setValue({
+        //     userData: {
+        //         username: suggestedName,
+        //         email: ''
+        //     },
+        //     secret: 'pet',
+        //     questionAnswer: '',
+        //     gender: 'male'
+        // })
+        
+        // set only selected values and don't override all the form
+        this.signupForm.form.patchValue({
+            userData: {
+                username: suggestedName
+            }
+        });
     }
 
     // triggered when the form is submitted and get reference to it for arguments
