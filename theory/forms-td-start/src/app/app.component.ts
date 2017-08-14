@@ -13,6 +13,16 @@ export class AppComponent {
     answer: string;
     genders: string[] = ["male", "female"];
 
+    user = {
+        username: '',
+        email: '',
+        secretQuestion: '',
+        answer: '',
+        gender: ''
+    };
+
+    submitted = false;
+
     suggestUserName() {
         const suggestedName = 'Superuser';
         // set all values of the form
@@ -42,5 +52,16 @@ export class AppComponent {
     // access to the form without passing argument thx to ViewChild
     onSubmit() {
         console.log(this.signupForm);
+
+        this.user.username = this.signupForm.value.userData.username;
+        this.user.email = this.signupForm.value.userData.email;
+        this.user.secretQuestion = this.signupForm.value.secret;
+        this.user.answer = this.signupForm.value.questionAnswer;
+        this.user.gender = this.signupForm.value.gender;
+
+        this.submitted = true;
+
+        // if we pass the same object as in setValue() we can reset with specific values
+        this.signupForm.reset();
     }
 }
