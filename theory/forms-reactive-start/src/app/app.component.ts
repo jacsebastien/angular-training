@@ -7,16 +7,18 @@ import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    genders = ['male', 'female'];
+    genders: string[] = ['male', 'female'];
+    forbiddenUsernames: string[] = ['Chris', 'Anna'];
 
-    // create an angular form
+    // declare an angular form
     signupForm: FormGroup;
 
     ngOnInit() {
         // init form and create form controls with some default values and validators
         this.signupForm = new FormGroup({
             'userData': new FormGroup({
-                'username': new FormControl(null, Validators.required),
+                // forbiddenNames is not called inside AppComponent but is called by Angular when its checks the validity so we need to bind(this) to be sure that "this" is referencing AppComponent inside the validator function
+                'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
                 'email': new FormControl(null, [Validators.required, Validators.email])
             }),
             'gender': new FormControl('male'),
@@ -34,5 +36,20 @@ export class AppComponent implements OnInit {
 
         // access to hobbies telling typescript that this is a FormArray and push it the new control
         (<FormArray>this.signupForm.get('hobbies')).push(control);
+    }
+
+    /*  create validator
+
+        recieve FormControl type as argument
+        return an object which can have multiple keys (that are interpreted as a string) and the value of those keys are type of boolean
+    */
+    forbiddenNames(control: FormControl): {[s: string]: boolean} {
+        // if control value is part of forbidden array
+        if(this.forbiddenUsernames.indexOf(control.value) !== -1) {
+            return {'isNameForbidden': true};
+        }
+
+        // if validation is successfull we need to return null and not false
+        return null;
     }
 }
