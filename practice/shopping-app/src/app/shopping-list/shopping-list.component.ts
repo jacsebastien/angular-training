@@ -18,16 +18,17 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         this.ingredients = this.slService.getIngredients();
         // subscribe to the subject (Observable and observer) of the service to affect edited array to this ingredients array
         this.subscription = this.slService.ingredientsChanged
-            .subscribe(
-            (ingredients: Ingredient[]) => {
+            .subscribe((ingredients: Ingredient[]) => {
                 this.ingredients = ingredients;
-            }
-            );
+            });
+    }
+
+    onEditItem(index: number) {
+        this.slService.startedEditing.next(index);
     }
 
     ngOnDestroy() {
         // unsubscribe to observable to prevent memory leaks
         this.subscription.unsubscribe();
     }
-
 }
