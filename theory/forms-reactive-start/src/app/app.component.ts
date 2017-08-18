@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from "@angular/forms";
+import { Observable } from "rxjs/Observable";
 
 @Component({
     selector: 'app-root',
@@ -18,8 +19,10 @@ export class AppComponent implements OnInit {
         this.signupForm = new FormGroup({
             'userData': new FormGroup({
                 // forbiddenNames is not called inside AppComponent but is called by Angular when its checks the validity so we need to bind(this) to be sure that "this" is referencing AppComponent inside the validator function
+                // pass a reference to the function and don't execute it
                 'username': new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
-                'email': new FormControl(null, [Validators.required, Validators.email])
+                // use 3rd argument to pass async validator
+                'email': new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmails)
             }),
             'gender': new FormControl('male'),
             'hobbies': new FormArray([])
@@ -51,5 +54,20 @@ export class AppComponent implements OnInit {
 
         // if validation is successfull we need to return null and not false
         return null;
+    }
+
+    // create async validator which returns a Promise or an Observable
+    forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+        const promise = new Promise<any>((resolve, reject) => {
+            setTimeout(() => {
+                if(control.value === 'test@test.com') {
+                    resolve({'isEmailForbidden': true});
+                } else {
+                    resolve(null);
+                }
+            }, 1500);
+        });
+
+        return promise;
     }
 }
