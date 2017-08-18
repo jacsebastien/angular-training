@@ -27,6 +27,16 @@ export class AppComponent implements OnInit {
             'gender': new FormControl('male'),
             'hobbies': new FormArray([])
         });
+
+        // react on value changes, can be called on individual form control
+        // this.signupForm.valueChanges.subscribe(
+        //     value => console.log(value)
+        // );
+
+        // same but on status
+        this.signupForm.statusChanges.subscribe(
+            status => console.log(status)
+        );
     }
 
     onSubmit() {
