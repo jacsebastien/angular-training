@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
 import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
@@ -6,6 +7,7 @@ import { Ingredient } from './../shared/ingredient.model';
 // need to have @Injectable decorator to be able to inject services on it
 @Injectable()
 export class RecipeService {
+    recipesChanged = new Subject<Recipe[]>()
     private recipes: Recipe[] = [
         new Recipe(
             'A Test Recipe', 
@@ -33,11 +35,21 @@ export class RecipeService {
         return this.recipes.slice();
     }
 
-    getRecipe(index: number) {
+    getRecipe(index: number): Recipe {
         return this.recipes[index];
     }
 
-    addIngredientsToSl(ingredients: Ingredient[]) {
+    addIngredientsToSl(ingredients: Ingredient[]): void {
         this.slService.addIngredients(ingredients);
+    }
+
+    addRecipe(recipe: Recipe): void {
+        this.recipes.push(recipe);
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe): void {
+        this.recipes[index] = newRecipe;
+        this.recipesChanged.next(this.recipes.slice());        
     }
 }
