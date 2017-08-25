@@ -18,3 +18,5 @@ app/**/*.map
 
 # Misc
 typings
+
+.DS_Store
