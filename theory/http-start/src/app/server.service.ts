@@ -22,4 +22,8 @@ export class ServerService {
         );
     }
 
+    getServers(): Observable<any> {
+        return this.http.get('https://udemy-ng-http-4bbe4.firebaseio.com/data.json');
+    }
+
 }
