@@ -20,3 +20,5 @@ app/**/*.map
 typings
 
 .DS_Store
+
+.vscode
