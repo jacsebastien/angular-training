@@ -30,6 +30,11 @@ export class RecipeService {
     // inject the shopping list service to get access to the list in this service
     constructor(private slService: ShoppingListService) {}
 
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes;
+        this.recipesChanged.next(this.recipes.slice());
+    }
+
     getRecipes() {
         // .slice() recreate a new copy of the "recipes" array to not return an instance of this array
         return this.recipes.slice();
