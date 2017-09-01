@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth-guard.service';
 import { SigninComponent } from './auth/signin/signin.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { NgModule } from '@angular/core';
@@ -14,9 +15,9 @@ const appRoutes: Routes = [
     { path: 'recipes', component: RecipesComponent, children: [
         { path: '', component: RecipeStartComponent },
         // new need to be before :id to avoid Angular confusing between route part and parameter
-        { path: 'new', component: RecipeEditComponent },
+        { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },
         { path: ':id', component: RecipeDetailComponent },
-        { path: ':id/edit', component: RecipeEditComponent }
+        { path: ':id/edit', component: RecipeEditComponent, canActivate: [AuthGuard] }
     ] }, // /recipes
     { path: 'shopping-list', component: ShoppingListComponent },
     { path: 'signup', component: SignupComponent },
