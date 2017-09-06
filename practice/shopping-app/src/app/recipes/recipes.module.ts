@@ -8,6 +8,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeListComponent } from './recipe-list/recipe-list.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipesComponent } from './recipes.component';
+import { RecipesRoutingModule } from 'app/recipes/recipes-routing.module';
 
 // define all the features that are used only by recipes module
 // "CommonModule" allow acces to all the common features inside this module and need to be imported
@@ -22,7 +23,8 @@ import { RecipesComponent } from './recipes.component';
     ],
     imports: [
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RecipesRoutingModule
     ]
 })
 export class RecipesModule {}
