@@ -7,7 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 const recipesRoutes: Routes = [
-    { path: 'recipes', component: RecipesComponent, children: [
+    { path: '', component: RecipesComponent, children: [
         { path: '', component: RecipeStartComponent },
         // new need to be before :id to avoid Angular confusing between route part and parameter
         { path: 'new', component: RecipeEditComponent, canActivate: [AuthGuard] },

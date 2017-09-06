@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a routerLink="/recipes" class="navbar-brand">Recipe Book</a>
+            <a routerLink="/" class="navbar-brand">Recipe Book</a>
         </div>
 
         <div class="navbar-default">
@@ -14,7 +14,7 @@
                     <li><a routerLink="/signup">Register</a></li>
                     <li><a routerLink="/signin">Login</a></li>
                 </ng-template>
-                <li *ngIf="authSrv.isAuthenticated()"><a (click)="onLogout()">Logout</a></li>                
+                <li *ngIf="authSrv.isAuthenticated()"><a (click)="onLogout()">Logout</a></li>
                 <li class="dropdown" appDropdown *ngIf="authSrv.isAuthenticated()">
                     <a class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
