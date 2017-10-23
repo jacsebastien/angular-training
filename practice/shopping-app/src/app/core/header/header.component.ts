@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Response } from '@angular/http';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { AuthService } from 'app/auth/auth.service';
 import { DataStorageService } from 'app/shared/data-storage.service';
 
@@ -20,7 +20,11 @@ export class HeaderComponent {
     onStoreData() {
         this.dataStorageService.storeDRecipes()
         .subscribe(
-            (response: Response) => {
+            // (response: HttpEvent<Object>) => {
+            //     console.log(response.type === HttpEventType.Sent);
+            //     console.log(response.type === HttpEventType.Response);
+            // }
+            (response) => {
                 console.log(response);
             }
         );
