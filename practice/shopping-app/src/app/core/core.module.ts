@@ -1,3 +1,4 @@
+import { LoggingInterceptor } from '../shared/logging.interceptor';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -31,7 +32,8 @@ import { AuthInterceptor } from '../shared/auth.interceptor';
         DataStorageService,
         AuthService,
         // tells Angular to use our custom interceptor on every http request
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
     ]
 })
 export class CoreModule {}
