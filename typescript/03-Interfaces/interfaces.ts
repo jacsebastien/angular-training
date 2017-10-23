@@ -10,7 +10,7 @@ interface User {
     confirmPassword?: string; // Optional property => Does not have to be implemented
 }
 
-let user:User;
+let user: User;
 
 // This value does not satisfy the interface => Compilation error
 // user = { anything: 'anything', anynumber: 5};
@@ -21,11 +21,11 @@ user = {username: 'max', password: 'supersecret'};
 // Interfaces can also contain functions (without the function body - as it only is a blueprint/ requirement)
 
 interface CanDrive {
-    accelerate(speed:number): void;
+    accelerate(speed: number): void;
 }
 
-let car:CanDrive = {
-    accelerate: function (speed:number) {
+let car: CanDrive = {
+    accelerate: function(speed: number) {
         // ...
     }
 };

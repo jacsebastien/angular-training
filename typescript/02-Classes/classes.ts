@@ -6,6 +6,7 @@
 class Car {
     engineName: string;
     gears: number;
+    // accessible only inside the class
     private speed: number;
 
     constructor(speed: number) {
@@ -24,6 +25,7 @@ class Car {
         console.log(this.speed);
     }
 
+    // static is usable without having to create an object
     static numberOfWheels(): number {
         return 4;
     }
