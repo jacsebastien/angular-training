@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './core/home/home.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -15,9 +15,13 @@ const appRoutes: Routes = [
 ];
 
 // forRoot is only used in root module, for featured modules use forChild
+// use preloadingStrategy to preload lazy loading and avoid loading time when user click on this routes
 @NgModule({
-    imports: [RouterModule.forRoot(appRoutes)],
-    exports: [RouterModule]
+    imports: [
+        RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
+    ],
+    exports: [RouterModule],
+    providers: [AuthGuard]
 })
 export class AppRoutingModule {
 

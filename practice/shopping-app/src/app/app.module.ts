@@ -11,12 +11,6 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 
-import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { RecipeService } from './recipes/recipe.service';
-import { DataStorageService } from './shared/data-storage.service';
-import { AuthService } from './auth/auth.service';
-import { AuthGuard } from './auth/auth-guard.service';
-
 // Use RecipesModule to wrap all recipes features
 // import it in app module to avoid import of a lot of components and clean up app module
 // use custom sharedModule to access some directives needed in app module and featured modules like recipes
@@ -33,13 +27,7 @@ import { AuthGuard } from './auth/auth-guard.service';
         AuthModule,
         CoreModule
     ],
-    providers: [
-        ShoppingListService,
-        RecipeService,
-        DataStorageService,
-        AuthService,
-        AuthGuard
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
