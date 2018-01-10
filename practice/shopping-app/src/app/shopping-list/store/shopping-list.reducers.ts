@@ -22,6 +22,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                     action.payload // + the new one which is inside action
                 ]
             };
+        // if type do not correspond to any action, just return the state
         default:
             return state;
     }
