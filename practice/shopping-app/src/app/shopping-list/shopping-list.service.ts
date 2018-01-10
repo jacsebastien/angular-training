@@ -31,14 +31,14 @@ export class ShoppingListService {
 
     deleteIngredient(index: number) {
         this.ingredients.splice(index, 1);
-        
+
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
     addIngredients(ingredients: Ingredient[]) {
-        // use the ES6 "spread" operator (...) to turn an array of elements into a list of elements and push them 
+        // use the ES6 "spread" operator (...) to turn an array of elements into a list of elements and push them
         this.ingredients.push(...ingredients);
-        
+
         // send data to observable for response
         this.ingredientsChanged.next(this.ingredients.slice());
     }
