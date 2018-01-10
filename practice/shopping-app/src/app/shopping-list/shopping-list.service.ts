@@ -1,3 +1,8 @@
+/*
+    this file ca be deleted because nothing is used anymore
+    I keep it for exemple of old app state before reducer
+*/
+
 import { Ingredient } from './../shared/ingredient.model';
 import { Subject } from 'rxjs/Subject';
 
@@ -10,19 +15,19 @@ export class ShoppingListService {
         new Ingredient('Appel', 4)
     ];
 
-    // getIngredients() {
-    //     return this.ingredients.slice();
-    // }
+    getIngredients() {
+        return this.ingredients.slice();
+    }
 
     getIngredient(index: number) {
         return this.ingredients[index];
     }
 
-    // addIngredient(ingredient: Ingredient) {
-    //     this.ingredients.push(ingredient);
-    //     // emit a new copy of the private "ingredients" array when we add an ingredient on it
-    //     this.ingredientsChanged.next(this.ingredients.slice());
-    // }
+    addIngredient(ingredient: Ingredient) {
+        this.ingredients.push(ingredient);
+        // emit a new copy of the private "ingredients" array when we add an ingredient on it
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
 
     updateIngredient(index: number, newIngredient: Ingredient) {
         this.ingredients[index] = newIngredient;
@@ -35,11 +40,11 @@ export class ShoppingListService {
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    // addIngredients(ingredients: Ingredient[]) {
-    //     // use the ES6 "spread" operator (...) to turn an array of elements into a list of elements and push them
-    //     this.ingredients.push(...ingredients);
+    addIngredients(ingredients: Ingredient[]) {
+        // use the ES6 "spread" operator (...) to turn an array of elements into a list of elements and push them
+        this.ingredients.push(...ingredients);
 
-    //     // send data to observable for response
-    //     this.ingredientsChanged.next(this.ingredients.slice());
-    // }
+        // send data to observable for response
+        this.ingredientsChanged.next(this.ingredients.slice());
+    }
 }

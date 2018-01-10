@@ -4,8 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from './shopping-list.service';
+// import { ShoppingListService } from './shopping-list.service';
 import * as fromShoppingList from './store/shopping-list.reducers';
+import * as ShoppingListActions from './store/shopping-list.actions';
 
 @Component({
     selector: 'app-shopping-list',
@@ -19,7 +20,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // private subscription: Subscription;
 
     constructor(
-        private slService: ShoppingListService,
+        // private slService: ShoppingListService,
         // store is a generic type and need to know the type of data that we need to retrieve
         // need to fit to the state defined in the module file
         // private store: Store<{shoppingList: {ingredients: Ingredient[]}}>
@@ -40,7 +41,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     }
 
     onEditItem(index: number) {
-        this.slService.startedEditing.next(index);
+        // this.slService.startedEditing.next(index);
+        this.store.dispatch(new ShoppingListActions.StartEdit(index));
     }
 
     ngOnDestroy() {

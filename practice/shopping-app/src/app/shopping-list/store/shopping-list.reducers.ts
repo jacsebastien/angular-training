@@ -47,7 +47,8 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             // get the list of all existing ingredients;
             const ingredients = [...state.ingredients];
             // replace the one corresponding to the index
-            ingredients[action.payload.index] = action.payload.ingredient;
+            // ingredients[action.payload.index] = action.payload.ingredient;
+            ingredients[state.editedIngredientIndex] = action.payload.ingredient;
 
             return {
                 ...state,
@@ -55,11 +56,20 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             }
         case ShoppingListActions.DELETE_INGREDIENT:
             const oldIngredients = [...state.ingredients];
-            oldIngredients.splice(action.payload, 1);
+            // oldIngredients.splice(action.payload, 1);
+            oldIngredients.splice(state.editedIngredientIndex, 1);
 
             return {
                 ...state,
                 ingredients: oldIngredients
+            }
+        case ShoppingListActions.START_EDIT:
+            // get all properties of the edited ingredient
+            const editedIngredient = {...state.ingredients[action.payload]};
+            return {
+                ...state,
+                editedIngredient: editedIngredient,
+                editedIngredientIndex: action.payload
             }
         // if type do not correspond to any action, just return the state
         default:
