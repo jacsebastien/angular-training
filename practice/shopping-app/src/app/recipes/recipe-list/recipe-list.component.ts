@@ -36,8 +36,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
+        // Called once, before the instance is destroyed.
+        // Add 'implements OnDestroy' to the class.
         this.subscription.unsubscribe();
     }
 }

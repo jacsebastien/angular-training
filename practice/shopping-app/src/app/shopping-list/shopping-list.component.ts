@@ -1,7 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-shopping-list',
@@ -9,18 +12,29 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-    ingredients: Ingredient[];
-    private subscription: Subscription;
+    // ingredients: Ingredient[];
+    // ingredients is an observable which recieve an object containing the ingredients array
+    shoppingListState: Observable<{ingredients: Ingredient[]}>;
+    // private subscription: Subscription;
 
-    constructor(private slService: ShoppingListService) { }
+    constructor(
+        private slService: ShoppingListService,
+        // store is a generic type and need to know the type of data that we need to retrieve
+        // need to fit to the state defined in the module file
+        private store: Store<{shoppingList: {ingredients: Ingredient[]}}>
+    ) { }
 
     ngOnInit() {
-        this.ingredients = this.slService.getIngredients();
+        // select the shoppingList part of the store states and get it's actual state
+        this.shoppingListState = this.store.select('shoppingList');
+
+        // old version with subscription
+        // this.ingredients = this.slService.getIngredients();
         // subscribe to the subject (Observable and observer) of the service to affect edited array to this ingredients array
-        this.subscription = this.slService.ingredientsChanged
-            .subscribe((ingredients: Ingredient[]) => {
-                this.ingredients = ingredients;
-            });
+        // this.subscription = this.slService.ingredientsChanged
+        //     .subscribe((ingredients: Ingredient[]) => {
+        //         this.ingredients = ingredients;
+        //     });
     }
 
     onEditItem(index: number) {
@@ -29,6 +43,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         // unsubscribe to observable to prevent memory leaks
-        this.subscription.unsubscribe();
+        // this.subscription.unsubscribe();
     }
 }

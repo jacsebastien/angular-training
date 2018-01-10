@@ -10,19 +10,19 @@ export class ShoppingListService {
         new Ingredient('Appel', 4)
     ];
 
-    getIngredients() {
-        return this.ingredients.slice();
-    }
+    // getIngredients() {
+    //     return this.ingredients.slice();
+    // }
 
     getIngredient(index: number) {
         return this.ingredients[index];
     }
 
-    addIngredient(ingredient: Ingredient) {
-        this.ingredients.push(ingredient);
-        // emit a new copy of the private "ingredients" array when we add an ingredient on it
-        this.ingredientsChanged.next(this.ingredients.slice());
-    }
+    // addIngredient(ingredient: Ingredient) {
+    //     this.ingredients.push(ingredient);
+    //     // emit a new copy of the private "ingredients" array when we add an ingredient on it
+    //     this.ingredientsChanged.next(this.ingredients.slice());
+    // }
 
     updateIngredient(index: number, newIngredient: Ingredient) {
         this.ingredients[index] = newIngredient;

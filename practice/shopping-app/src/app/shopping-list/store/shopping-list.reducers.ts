@@ -22,6 +22,14 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                     action.payload // + the new one which is inside action
                 ]
             };
+        case ShoppingListActions.ADD_INGREDIENTS:
+            return {
+                ...state,
+                ingredients: [
+                    ...state.ingredients,
+                    ...action.payload // + all the new ingredients
+                ]
+            };
         // if type do not correspond to any action, just return the state
         default:
             return state;

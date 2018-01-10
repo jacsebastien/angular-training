@@ -1,8 +1,11 @@
-import { Subject } from 'rxjs/Subject';
 import { Injectable } from '@angular/core';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs/Subject';
+import { Store } from '@ngrx/store';
+
+// import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { Recipe } from './recipe.model';
 import { Ingredient } from './../shared/ingredient.model';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 
 // need to have @Injectable decorator to be able to inject services on it
 @Injectable()
@@ -10,16 +13,16 @@ export class RecipeService {
     recipesChanged = new Subject<Recipe[]>()
     private recipes: Recipe[] = [
         new Recipe(
-            'A Test Recipe', 
-            'This is a simply test', 
+            'A Test Recipe',
+            'This is a simply test',
             'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Recipe-575434.svg/899px-Recipe-575434.svg.png',
             [
                 new Ingredient('Meat', 1),
                 new Ingredient('French Fries', 20)
             ]),
         new Recipe(
-            'A Second Recipe', 
-            'This is an other test', 
+            'A Second Recipe',
+            'This is an other test',
             'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Recipe-575434.svg/899px-Recipe-575434.svg.png',
             [
                 new Ingredient('Buns', 2),
@@ -28,7 +31,10 @@ export class RecipeService {
     ];
 
     // inject the shopping list service to get access to the list in this service
-    constructor(private slService: ShoppingListService) {}
+    constructor(
+        // private slService: ShoppingListService,
+        private store: Store<{shoppingList: {ingredients: Ingredient[]}}>
+    ) {}
 
     setRecipes(recipes: Recipe[]) {
         this.recipes = recipes;
@@ -45,7 +51,7 @@ export class RecipeService {
     }
 
     addIngredientsToSl(ingredients: Ingredient[]): void {
-        this.slService.addIngredients(ingredients);
+        this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
     }
 
     addRecipe(recipe: Recipe): void {
@@ -60,6 +66,6 @@ export class RecipeService {
 
     deleteRecipe(index: number) {
         this.recipes.splice(index, 1);
-        this.recipesChanged.next(this.recipes.slice());        
+        this.recipesChanged.next(this.recipes.slice());
     }
 }
