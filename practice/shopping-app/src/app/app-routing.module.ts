@@ -10,7 +10,8 @@ const appRoutes: Routes = [
     // when the ALL path is empty, redirect to /recipes
     { path: '', component: HomeComponent },
     // use lasy loading to load the routes and components only if visited and not when app starts and implements guard
-    { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule', canLoad: [AuthGuard]},
+    // { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule', canLoad: [AuthGuard]},
+    { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'},
     { path: 'shopping-list', component: ShoppingListComponent }
 ];
 

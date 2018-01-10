@@ -51,6 +51,7 @@ export class RecipeService {
     }
 
     addIngredientsToSl(ingredients: Ingredient[]): void {
+        // could be used here or directly inside the component
         this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
     }
 

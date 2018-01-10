@@ -30,6 +30,24 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
                     ...action.payload // + all the new ingredients
                 ]
             };
+        case ShoppingListActions.UPDATE_INGREDIENT:
+            // get the list of all existing ingredients;
+            const ingredients = [...state.ingredients];
+            // replace the one corresponding to the index
+            ingredients[action.payload.index] = action.payload.ingredient;
+
+            return {
+                ...state,
+                ingredients: ingredients
+            }
+        case ShoppingListActions.DELETE_INGREDIENT:
+            const oldIngredients = [...state.ingredients];
+            oldIngredients.splice(action.payload, 1);
+
+            return {
+                ...state,
+                ingredients: oldIngredients
+            }
         // if type do not correspond to any action, just return the state
         default:
             return state;

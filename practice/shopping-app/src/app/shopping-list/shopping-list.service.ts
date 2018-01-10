@@ -35,11 +35,11 @@ export class ShoppingListService {
         this.ingredientsChanged.next(this.ingredients.slice());
     }
 
-    addIngredients(ingredients: Ingredient[]) {
-        // use the ES6 "spread" operator (...) to turn an array of elements into a list of elements and push them
-        this.ingredients.push(...ingredients);
+    // addIngredients(ingredients: Ingredient[]) {
+    //     // use the ES6 "spread" operator (...) to turn an array of elements into a list of elements and push them
+    //     this.ingredients.push(...ingredients);
 
-        // send data to observable for response
-        this.ingredientsChanged.next(this.ingredients.slice());
-    }
+    //     // send data to observable for response
+    //     this.ingredientsChanged.next(this.ingredients.slice());
+    // }
 }
