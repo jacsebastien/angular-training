@@ -12,6 +12,8 @@ import { Store } from '@ngrx/store';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import * as ShoppingListActions from '../store/shopping-list.actions';
+// fromShoppingList is a conventional name for shopping-list reducer
+import * as fromShoppingList from '../store/shopping-list.reducers';
 
 @Component({
     selector: 'app-shopping-edit',
@@ -29,7 +31,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
     constructor(
         private slService: ShoppingListService,
-        private store: Store<{shoppingList: {ingredients: Ingredient[]}}>
+        // private store: Store<{shoppingList: {ingredients: Ingredient[]}}>
+        // use the interface set in the reducer to type the store
+        private store: Store<fromShoppingList.AppState>
     ) { }
 
     ngOnInit() {

@@ -1,12 +1,25 @@
 import * as ShoppingListActions from './shopping-list.actions';
 import { Ingredient } from 'app/shared/ingredient.model';
 
+// create an overall AppState interface with the differents states
+export interface AppState {
+    shoppingList: State
+}
+
+export interface State {
+    ingredients: Ingredient[],
+    editedIngredient: Ingredient,
+    editedIngredientIndex: number
+}
+
 // define the initial values at app start
-const initialState = {
+const initialState: State = {
     ingredients: [
         new Ingredient('Kiwi', 2),
         new Ingredient('Appel', 4)
-    ]
+    ],
+    editedIngredient: null,
+    editedIngredientIndex: -1
 };
 
 // replace the old state by a new one and return it
