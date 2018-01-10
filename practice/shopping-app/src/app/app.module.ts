@@ -1,4 +1,3 @@
-import { shoppingListReducer } from './shopping-list/store/shopping-list.reducers';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducers';
 
 // Use RecipesModule to wrap all recipes features
 // import it in app module to avoid import of a lot of components and clean up app module
@@ -27,7 +27,8 @@ import { StoreModule } from '@ngrx/store';
         ShoppingListModule,
         AuthModule,
         CoreModule,
-        StoreModule.forRoot({shoppingList: shoppingListReducer})
+        // import the store module and use forRoot to be equally loaded and not leasely
+        StoreModule.forRoot({shoppingList: shoppingListReducer}) // add all the reducers inside the object
     ],
     providers: [],
     bootstrap: [AppComponent]
